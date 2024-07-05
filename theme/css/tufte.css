@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+main {
+    position: relative;
+}
+
+.sidenote,
+.marginnote {
+    position: absolute;
+    word-break: break-word;
+    right: -280px;
+    width: 250px;
+    font-size: 0.8em;
+}
+
+.sidenote-number:after,
+.sidenote:before {
+    position: relative;
+    vertical-align: baseline; 
+}
+
+.sidenote-number:after {
+    font-size: 1rem;
+    top: -0.5rem;
+    left: 0.1rem; 
+}
+
+.sidenote:before {
+    font-size: 1rem;
+    top: -0.5rem; 
+}
+
+.sidenote p {
+  margin: 0;
+}
+
+li {
+  position: relative;
+}
+li .sidenote {
+  top: 0;
+}
+.sidenote img {
+  vertical-align: top;
+  max-width: 95%;
+}
+
+@media (max-width: 1380px) {
+    .sidenote,
+    .marginnote {
+        display: block;
+        position: relative;
+        left: 0;
+        right: 0;
+        width: auto;
+        background-color: var(--quote-bg);
+        padding: 5px 15px;
+        font-size: 1em;
+    }
+}
+
+h2, h3 {
+    margin-top: 2em;
+}

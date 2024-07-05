@@ -1,0 +1,745 @@
+<!DOCTYPE HTML>
+<html lang="cs" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Statické pole - Úvod do programování</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        <style>
+.xterm {
+  margin-top: 10px;
+}
+.content {
+  overflow-y: visible !important;
+}
+video {
+    max-width: 100%;
+}
+</style>
+<script src="/wasm/coi-serviceworker.js"></script>
+<script src="https://kelvin.cs.vsb.cz/upr/animations.js"></script>
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../../favicon.png">
+        
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+        <link rel="stylesheet" href="../../theme/css/tufte.css">
+        
+        <link rel="stylesheet" href="../../theme/asciinema-player.css">
+        
+        <link rel="stylesheet" href="../../src/wasm/xterm.min.css">
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "rust" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item "><a href="../../uvod/uvod.html"><strong aria-hidden="true">1.</strong> Úvod</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../uvod/programovani.html"><strong aria-hidden="true">1.1.</strong> Programování</a></li><li class="chapter-item "><a href="../../uvod/programovaci_jazyky.html"><strong aria-hidden="true">1.2.</strong> Programovací jazyky</a></li><li class="chapter-item "><a href="../../uvod/jazyk_c.html"><strong aria-hidden="true">1.3.</strong> Jazyk C</a></li><li class="chapter-item "><a href="../../uvod/pamet.html"><strong aria-hidden="true">1.4.</strong> Paměť</a></li></ol></li><li class="chapter-item "><a href="../../prostredi/nastaveni_prostredi.html"><strong aria-hidden="true">2.</strong> Nastavení prostředí</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../prostredi/linux/linux.html"><strong aria-hidden="true">2.1.</strong> Linux</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../prostredi/linux/instalace.html"><strong aria-hidden="true">2.1.1.</strong> Instalace</a></li></ol></li><li class="chapter-item "><a href="../../prostredi/editor.html"><strong aria-hidden="true">2.2.</strong> Editor</a></li><li class="chapter-item "><a href="../../prostredi/preklad_programu.html"><strong aria-hidden="true">2.3.</strong> Překlad</a></li><li class="chapter-item "><a href="../../prostredi/ladeni.html"><strong aria-hidden="true">2.4.</strong> Ladění</a></li></ol></li><li class="chapter-item expanded "><a href="../../c/programovani.html"><strong aria-hidden="true">3.</strong> Programování v C</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../c/syntaxe.html"><strong aria-hidden="true">3.1.</strong> Syntaxe</a></li><li class="chapter-item "><a href="../../c/prikazy_vyrazy.html"><strong aria-hidden="true">3.2.</strong> Příkazy a výrazy</a></li><li class="chapter-item "><a href="../../c/promenne/promenne.html"><strong aria-hidden="true">3.3.</strong> Proměnné</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../c/promenne/globalni_promenne.html"><strong aria-hidden="true">3.3.1.</strong> Globální proměnné</a></li><li class="chapter-item "><a href="../../c/promenne/konstanty.html"><strong aria-hidden="true">3.3.2.</strong> Konstanty</a></li><li class="chapter-item "><a href="../../c/promenne/slozeny_zapis.html"><strong aria-hidden="true">3.3.3.</strong> Složený zápis</a></li><li class="chapter-item "><a href="../../c/promenne/pojmenovavani.html"><strong aria-hidden="true">3.3.4.</strong> Pojmenovávání proměnných</a></li></ol></li><li class="chapter-item "><a href="../../c/datove_typy/datove_typy.html"><strong aria-hidden="true">3.4.</strong> Datové typy</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../c/datove_typy/celociselne_typy.html"><strong aria-hidden="true">3.4.1.</strong> Celočíselné typy</a></li><li class="chapter-item "><a href="../../c/datove_typy/desetinne_typy.html"><strong aria-hidden="true">3.4.2.</strong> Desetinné číselné typy</a></li><li class="chapter-item "><a href="../../c/datove_typy/pravdivostni_typy.html"><strong aria-hidden="true">3.4.3.</strong> Pravdivostní typy</a></li><li class="chapter-item "><a href="../../c/datove_typy/konverze.html"><strong aria-hidden="true">3.4.4.</strong> Konverze</a></li></ol></li><li class="chapter-item "><a href="../../c/rizeni_toku/rizeni_toku.html"><strong aria-hidden="true">3.5.</strong> Řízení toku</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../c/rizeni_toku/podminky.html"><strong aria-hidden="true">3.5.1.</strong> Podmínky</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../c/rizeni_toku/if.html"><strong aria-hidden="true">3.5.1.1.</strong> Příkaz if</a></li><li class="chapter-item "><a href="../../c/rizeni_toku/switch.html"><strong aria-hidden="true">3.5.1.2.</strong> Příkaz switch</a></li><li class="chapter-item "><a href="../../c/rizeni_toku/ternarni_operator.html"><strong aria-hidden="true">3.5.1.3.</strong> Ternární operátor</a></li></ol></li><li class="chapter-item "><a href="../../c/rizeni_toku/cykly.html"><strong aria-hidden="true">3.5.2.</strong> Cykly</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../c/rizeni_toku/while.html"><strong aria-hidden="true">3.5.2.1.</strong> Cyklus while</a></li><li class="chapter-item "><a href="../../c/rizeni_toku/for.html"><strong aria-hidden="true">3.5.2.2.</strong> Cyklus for</a></li></ol></li></ol></li><li class="chapter-item "><a href="../../c/funkce/funkce.html"><strong aria-hidden="true">3.6.</strong> Funkce</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../c/funkce/rekurze.html"><strong aria-hidden="true">3.6.1.</strong> Rekurze</a></li><li class="chapter-item "><a href="../../c/funkce/stdlib.html"><strong aria-hidden="true">3.6.2.</strong> Funkce standardní knihovny</a></li></ol></li><li class="chapter-item "><a href="../../c/preprocesor/preprocesor.html"><strong aria-hidden="true">3.7.</strong> Preprocesor</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../c/preprocesor/vkladani_souboru.html"><strong aria-hidden="true">3.7.1.</strong> Vkládání souborů</a></li><li class="chapter-item "><a href="../../c/preprocesor/makra.html"><strong aria-hidden="true">3.7.2.</strong> Makra</a></li></ol></li><li class="chapter-item "><a href="../../c/prace_s_pameti/prace_s_pameti.html"><strong aria-hidden="true">3.8.</strong> Práce s pamětí</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../c/prace_s_pameti/automaticka_pamet.html"><strong aria-hidden="true">3.8.1.</strong> Automatická paměť</a></li><li class="chapter-item "><a href="../../c/prace_s_pameti/ukazatele.html"><strong aria-hidden="true">3.8.2.</strong> Ukazatele</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../c/prace_s_pameti/ukazatele_na_funkce.html"><strong aria-hidden="true">3.8.2.1.</strong> Ukazatele na funkce</a></li></ol></li><li class="chapter-item "><a href="../../c/prace_s_pameti/dynamicka_pamet.html"><strong aria-hidden="true">3.8.3.</strong> Dynamická paměť</a></li><li class="chapter-item "><a href="../../c/prace_s_pameti/globalni_pamet.html"><strong aria-hidden="true">3.8.4.</strong> Globální paměť</a></li></ol></li><li class="chapter-item expanded "><a href="../../c/pole/pole.html"><strong aria-hidden="true">3.9.</strong> Pole</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../c/pole/staticka_pole.html" class="active"><strong aria-hidden="true">3.9.1.</strong> Statické pole</a></li><li class="chapter-item "><a href="../../c/pole/dynamicka_pole.html"><strong aria-hidden="true">3.9.2.</strong> Dynamické pole</a></li><li class="chapter-item "><a href="../../c/pole/vicerozmerna_pole.html"><strong aria-hidden="true">3.9.3.</strong> Vícerozměrné pole</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../c/pole/zubata_pole.html"><strong aria-hidden="true">3.9.3.1.</strong> Zubatá pole</a></li></ol></li></ol></li><li class="chapter-item "><a href="../../c/text/text.html"><strong aria-hidden="true">3.10.</strong> Text</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../c/text/znaky.html"><strong aria-hidden="true">3.10.1.</strong> Znaky</a></li><li class="chapter-item "><a href="../../c/text/retezce.html"><strong aria-hidden="true">3.10.2.</strong> Řetězce</a></li><li class="chapter-item "><a href="../../c/text/vstupavystup.html"><strong aria-hidden="true">3.10.3.</strong> Vstup a výstup</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../c/text/vstup.html"><strong aria-hidden="true">3.10.3.1.</strong> Vstup</a></li><li class="chapter-item "><a href="../../c/text/vystup.html"><strong aria-hidden="true">3.10.3.2.</strong> Výstup</a></li></ol></li></ol></li><li class="chapter-item "><a href="../../c/struktury/vlastni_datove_typy.html"><strong aria-hidden="true">3.11.</strong> Vlastní datové typy</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../c/struktury/struktury.html"><strong aria-hidden="true">3.11.1.</strong> Struktury</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../c/struktury/pametova_reprezentace.html"><strong aria-hidden="true">3.11.1.1.</strong> Reprezentace v paměti</a></li></ol></li><li class="chapter-item "><a href="../../c/struktury/struktury_funkce.html"><strong aria-hidden="true">3.11.2.</strong> Struktury a funkce</a></li></ol></li><li class="chapter-item "><a href="../../c/soubory/soubory.html"><strong aria-hidden="true">3.12.</strong> Soubory</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../c/soubory/otevirani_souboru.html"><strong aria-hidden="true">3.12.1.</strong> Otevření souborů</a></li><li class="chapter-item "><a href="../../c/soubory/prace_se_soubory.html"><strong aria-hidden="true">3.12.2.</strong> Práce se soubory</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../c/soubory/zapis_do_souboru.html"><strong aria-hidden="true">3.12.2.1.</strong> Zápis do souboru</a></li><li class="chapter-item "><a href="../../c/soubory/cteni_ze_souboru.html"><strong aria-hidden="true">3.12.2.2.</strong> Čtení ze souboru</a></li></ol></li></ol></li><li class="chapter-item "><a href="../../c/modularizace/modularizace.html"><strong aria-hidden="true">3.13.</strong> Modularizace</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../c/modularizace/linker.html"><strong aria-hidden="true">3.13.1.</strong> Linker</a></li><li class="chapter-item "><a href="../../c/modularizace/pouzivani_kodu_z_jinych_souboru.html"><strong aria-hidden="true">3.13.2.</strong> Používání kódu z jiných souborů</a></li><li class="chapter-item "><a href="../../c/modularizace/hlavickove_soubory.html"><strong aria-hidden="true">3.13.3.</strong> Hlavičkové soubory</a></li><li class="chapter-item "><a href="../../c/modularizace/knihovny.html"><strong aria-hidden="true">3.13.4.</strong> Knihovny</a></li></ol></li><li class="chapter-item "><a href="../../c/automatizace_prekladu.html"><strong aria-hidden="true">3.14.</strong> Automatizace překladu</a></li><li class="chapter-item "><a href="../../c/aplikovane_ulohy/ulohy.html"><strong aria-hidden="true">3.15.</strong> Aplikované úlohy</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../c/aplikovane_ulohy/tga.html"><strong aria-hidden="true">3.15.1.</strong> TGA</a></li><li class="chapter-item "><a href="../../c/aplikovane_ulohy/gif.html"><strong aria-hidden="true">3.15.2.</strong> GIF</a></li><li class="chapter-item "><a href="../../c/aplikovane_ulohy/sdl.html"><strong aria-hidden="true">3.15.3.</strong> SDL</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../c/aplikovane_ulohy/sdl/herni_smycka.html"><strong aria-hidden="true">3.15.3.1.</strong> Herní smyčka</a></li><li class="chapter-item "><a href="../../c/aplikovane_ulohy/sdl/kresleni.html"><strong aria-hidden="true">3.15.3.2.</strong> Kreslení</a></li><li class="chapter-item "><a href="../../c/aplikovane_ulohy/sdl/vstup.html"><strong aria-hidden="true">3.15.3.3.</strong> Vstup</a></li></ol></li><li class="chapter-item "><a href="../../c/aplikovane_ulohy/chipmunk.html"><strong aria-hidden="true">3.15.4.</strong> Chipmunk</a></li></ol></li><li class="chapter-item "><a href="../../c/co_dal.html"><strong aria-hidden="true">3.16.</strong> Co dál?</a></li></ol></li><li class="chapter-item "><a href="../../ruzne/ruzne.html"><strong aria-hidden="true">4.</strong> Různé</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../ruzne/rozklad_problemu.html"><strong aria-hidden="true">4.1.</strong> Rozklad problému</a></li><li class="chapter-item "><a href="../../ruzne/vyhodnocovani_vyrazu.html"><strong aria-hidden="true">4.2.</strong> Vyhodnocování výrazů</a></li><li class="chapter-item "><a href="../../ruzne/nahodna_cisla.html"><strong aria-hidden="true">4.3.</strong> Generování náhodných čísel</a></li><li class="chapter-item "><a href="../../ruzne/dynamicky_rostouci_pole.html"><strong aria-hidden="true">4.4.</strong> Dynamicky rostoucí pole</a></li><li class="chapter-item "><a href="../../ruzne/funkce_main.html"><strong aria-hidden="true">4.5.</strong> Funkce main</a></li><li class="chapter-item "><a href="../../ruzne/parametry_prekladace.html"><strong aria-hidden="true">4.6.</strong> Parametry překladače</a></li><li class="chapter-item "><a href="../../ruzne/nedefinovane_chovani.html"><strong aria-hidden="true">4.7.</strong> Nedefinované chování</a></li><li class="chapter-item "><a href="../../ruzne/tahak.html"><strong aria-hidden="true">4.8.</strong> Tahák</a></li></ol></li><li class="chapter-item "><a href="../../ulohy/ulohy.html"><strong aria-hidden="true">5.</strong> Úlohy</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../ulohy/promenne.html"><strong aria-hidden="true">5.1.</strong> Proměnné</a></li><li class="chapter-item "><a href="../../ulohy/podminky_a_cykly.html"><strong aria-hidden="true">5.2.</strong> Podmínky a cykly</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../ulohy/kulicka.html"><strong aria-hidden="true">5.2.1.</strong> Odrážející se kulička</a></li><li class="chapter-item "><a href="../../ulohy/grafy.html"><strong aria-hidden="true">5.2.2.</strong> Vykreslování grafů funkcí</a></li></ol></li><li class="chapter-item "><a href="../../ulohy/funkce.html"><strong aria-hidden="true">5.3.</strong> Funkce</a></li><li class="chapter-item "><a href="../../ulohy/ukazatele.html"><strong aria-hidden="true">5.4.</strong> Ukazatele</a></li><li class="chapter-item "><a href="../../ulohy/pole.html"><strong aria-hidden="true">5.5.</strong> Pole</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../ulohy/pvp.html"><strong aria-hidden="true">5.5.1.</strong> PvP bitevní hra</a></li><li class="chapter-item "><a href="../../ulohy/dvourozmerne_pole.html"><strong aria-hidden="true">5.5.2.</strong> Dvourozměrné pole</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../ulohy/digitalni_hodiny.html"><strong aria-hidden="true">5.5.2.1.</strong> Digitální hodiny</a></li></ol></li></ol></li><li class="chapter-item "><a href="../../ulohy/text.html"><strong aria-hidden="true">5.6.</strong> Text</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../ulohy/kalkulacka.html"><strong aria-hidden="true">5.6.1.</strong> Kalkulačka</a></li><li class="chapter-item "><a href="../../ulohy/strelba_na_terc.html"><strong aria-hidden="true">5.6.2.</strong> Střelba na terč</a></li><li class="chapter-item "><a href="../../ulohy/cisteni_chatu.html"><strong aria-hidden="true">5.6.3.</strong> Čištění chatu</a></li><li class="chapter-item "><a href="../../ulohy/brainfuck.html"><strong aria-hidden="true">5.6.4.</strong> Překladač jazyka Brainfuck</a></li></ol></li><li class="chapter-item "><a href="../../ulohy/struktury.html"><strong aria-hidden="true">5.7.</strong> Struktury</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../ulohy/tga_watch.html"><strong aria-hidden="true">5.7.1.</strong> TGA hodiny</a></li><li class="chapter-item "><a href="../../ulohy/letters.html"><strong aria-hidden="true">5.7.2.</strong> Létající písmenka</a></li></ol></li><li class="chapter-item "><a href="../../ulohy/soubory.html"><strong aria-hidden="true">5.8.</strong> Soubory</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../ulohy/meme.html"><strong aria-hidden="true">5.8.1.</strong> Meme generátor</a></li></ol></li><li class="chapter-item "><a href="../../ulohy/sdl.html"><strong aria-hidden="true">5.9.</strong> SDL</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../ulohy/snake/snake.html"><strong aria-hidden="true">5.9.1.</strong> Had</a></li></ol></li></ol></li><li class="chapter-item "><a href="../../caste_chyby/caste_chyby.html"><strong aria-hidden="true">6.</strong> Časté chyby</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../caste_chyby/pametove_chyby.html"><strong aria-hidden="true">6.1.</strong> Paměťové chyby</a></li></ol></li><li class="chapter-item "><a href="../../galerie_projektu/galerie_projektu.html"><strong aria-hidden="true">7.</strong> Galerie projektů</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../galerie_projektu/2020.html"><strong aria-hidden="true">7.1.</strong> 2020/2021</a></li><li class="chapter-item "><a href="../../galerie_projektu/2023.html"><strong aria-hidden="true">7.2.</strong> 2023/2024</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Úvod do programování</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        <a href="https://github.com/mrlvsb/upr-skripta" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#statická-pole" id="statická-pole">Statická pole</a></h1>
+<p>Pole v <a href="../prace_s_pameti/automaticka_pamet.html">automatické paměti</a><sup class='margin-toggle sidenote-number'>1</sup> (na zásobníku) se označují
+jako <strong>statická pole</strong> (<em>static arrays</em>). Můžeme je vytvořit tak, že při definici proměnné za její
+název přidáme hranaté závorky s číslem udávajícím počet prvků v poli. Takto například vytvoříme pole
+celých čísel s třemi prvky:</p>
+<span class='sidenote'><p><sup class='number'>1</sup>Pole můžete tímto způsobem vytvořit také v
+<a href="../prace_s_pameti/globalni_pamet.html">globální paměti</a>, pokud vytvoříte
+<a href="../promenne/globalni_promenne.html">globální proměnnou</a> datového typu pole.</p>
+</span>
+<pre><code class="language-c">int pole[3];
+</code></pre>
+<p>Takováto proměnná bude obsahovat paměť pro 3 celá čísla (tedy nejspíše na vašem počítači dohromady
+12 bytů). Počet prvků v poli se označuje jako jeho <strong>velikost</strong> (<em>size</em>).</p>
+<blockquote>
+<p>Pozor na to, že hranaté závorky se udávají za název proměnné, a ne za název datového typu.
+<code>int[3] pole;</code> je tedy špatně.</p>
+</blockquote>
+<p>Čísla takového pole budou v paměti uložena jedno za druhým<sup class='margin-toggle sidenote-number'>2</sup>:
+<upr-container>
+<upr-array array='[0, 0, 0]'></upr-array>
+</upr-container></p>
+<span class='sidenote'><p><sup class='number'>2</sup>Každý zelený čtverec na tomto obrázku reprezentuje 4 byty v paměti (velikost jednoho <code>int</code>u).</p>
+</span>
+<p>V jistém smyslu je tak pole pouze zobecněním normální proměnné. Pokud totiž vytvoříte pole o
+velikosti jedna (<code>int a[1];</code>), tak v paměti bude reprezentováno úplně stejně jako klasická proměnná
+(<code>int a;</code>).</p>
+<blockquote>
+<p>Pole lze vytvořit také na haldě pomocí <a href="dynamicka_pole.html">dynamické alokace paměti</a>. Všechny níže
+popsané koncepty jsou platné i pro dynamická pole, nicméně budeme je demonstrovat na statických
+polích, protože ty je jednodušší vytvořit.</p>
+</blockquote>
+<h3><a class="header" href="#konstantní-velikost-statického-pole" id="konstantní-velikost-statického-pole">Konstantní velikost statického pole</a></h3>
+<p>Hodnota zadaná v hranatých závorkách by měla být &quot;konstantním výrazem&quot;, tj. buď přímo číselná hodnota anebo
+číselná hodnota pocházející z <a href="../preprocesor/makra.html">makra</a><sup class='margin-toggle sidenote-number'>3</sup>. Pokud budete potřebovat pole dynamické velikosti,
+tak byste měli použít <a href="dynamicka_pole.html">dynamickou alokaci paměti</a>.</p>
+<span class='sidenote'><p><sup class='number'>3</sup>Dokonce ani <a href="../promenne/konstanty.html">konstantní</a> proměnná
+<a href="https://stackoverflow.com/questions/62354105/why-is-const-int-x-5-not-a-constant-expression-in-c">není</a>
+v C &quot;konstantním výrazem&quot;.</p>
+</span>
+<p>Jazyk <em>C</em> od verze <a href="https://en.wikipedia.org/wiki/C99"><em>C99</em></a> již sice povoluje dávat do hranatých
+závorek i &quot;dynamické&quot; hodnoty, tj. výrazy, jejichž hodnota nemusí být známa v době překladu:</p>
+<pre><code class="language-c">int velikost = ...; // velikost se načte např. ze souboru
+int pole[velikost];
+</code></pre>
+<p>Tato funkcionalita zvaná <a href="https://en.wikipedia.org/wiki/Variable-length_array">VLA</a> (variable-length array)
+je nicméně určená pro velmi specifické použití a nese s sebou různé nevýhody, proto ji v rámci předmětu
+UPR <strong>nepoužívejte</strong>. Pokud si chcete být jisti, že se VLA ve vašem kódu nevyskytuje, překládejte své programy s
+<a href="../../ruzne/parametry_prekladace.html">parametrem překladače</a> <code style="white-space: nowrap;">-Werror=vla</code>.</p>
+<details>
+<summary>Proč ne VLA?</summary>
+<p>Zásobník má značně <a href="../prace_s_pameti/automaticka_pamet.html#nev%C3%BDhody-automatick%C3%A9-pam%C4%9Bti">omezenou velikost</a>
+a není určen pro alokaci velkého množství paměti<sup class='margin-toggle sidenote-number'>4</sup>. Pokud velikost takovéhoto pole může ovlivnit
+uživatel programu (např. zadáním vstupu), může váš program jednoduše &quot;shodit&quot; (v lepším případě)
+nebo způsobit přepsání existující paměti (v horším případě), pokud by zadal velké
+číslo a došlo by k pokusu o vytvoření moc velkého pole na zásobníku. VLA má také různé problémy s
+kompatibilitou mezi překladači a jeho implementace překladači není zdaleka triviální.</p>
+<span class='sidenote'><p><sup class='number'>4</sup>Můžete si například zkusit přeložit následující program:</p>
+<pre><code class="language-c">int main() {
+    int pole[10000000];
+    return 0;
+}
+</code></pre>
+<p>Při spuštění by měl program selhat na
+<a href="../../caste_chyby/pametove_chyby.html#segmentation-fault">paměťovou chybu</a>, i když váš počítač má
+pravděpodobně více než <code>10000000 * 4</code> (cca <code>38</code> MiB) paměti. Pokud chcete alokovat více než několik
+stovek bytů, použijte raději <a href="dynamicka_pole.html">dynamickou alokaci</a> na haldě.</p>
+</span>
+<p>Alokace paměti s dynamickou velikostí na zásobníku se může hodit ve velmi specifických případech,
+např. při vývoji embedded zařízení nebo při vysoce efektivní práci s I/O (vstup/výstup). Nicméně pro
+účely běžného programování v <em>C</em> a předmětu UPR rozhodně není potřeba, proto se VLA prosíme zkuste
+vyhnout.</p>
+</details>
+<h2><a class="header" href="#počítání-od-nuly" id="počítání-od-nuly">Počítání od nuly</a></h2>
+<p>Pozice jednotlivých prvků v poli se označují jako jejich <strong>indexy</strong> (<em>array indices</em>). Tyto pozice
+se číslují od hodnoty <code>0</code> (tedy ne od jedničky, jak můžete být jinak zvyklí). První prvek pole je
+tedy ve skutečnosti na nulté pozici (indexu), druhý na první pozici atd. (viz obrázek nahoře).
+<strong>Počítání od nuly</strong> (<em>zero-based indexing</em>) je ve světě programování běžné a budete si na něj
+muset zvyknout. Jeden z důvodů, proč se prvky počítají právě od nuly, se dozvíte
+<a href="#p%C5%99%C3%ADstup-k-prvk%C5%AFm-pole">níže</a>.</p>
+<p>Z tohoto vyplývá jedna důležitá vlastnost - poslední prvek pole je vždy na indexu
+<code>&lt;velikost pole&gt; - 1</code>! Pokud byste se pokusili přistoupit k prvku na indexu <code>&lt;velikost pole&gt;</code>,
+budete přistupovat mimo paměť pole, což způsobí
+<a href="../../caste_chyby/pametove_chyby.html">paměťovou chybu</a>.</p>
+<h2><a class="header" href="#inicializace-pole" id="inicializace-pole">Inicializace pole</a></h2>
+<p>Stejně jako u normálních lokálních proměnných
+<a href="../promenne/promenne.html#v%C5%BEdy-inicializujte-prom%C4%9Bnn%C3%A9">platí</a>, že pokud pole nenainicializujete,
+tak bude obsahovat nedefinované hodnoty. V takovém případě nesmíte hodnoty v poli jakkoliv číst,
+jinak by došlo k <a href="../../ruzne/nedefinovane_chovani.html">nedefinovanému chování</a> 💣! K inicializaci pole můžete
+použít složené závorky se seznamem hodnot oddělených čárkou, které budou do pole uloženy. Pokud
+nezadáte dostatek hodnot pro vyplnění celého pole, tak zbytek hodnot bude nastaveno na nulu.</p>
+<pre><code class="language-c">int a[3];               // pole bez definované hodnoty, nepoužívat!
+int b[3] = {};          // pole s hodnotami 0, 0, 0
+int c[4] = { 1 };       // pole s hodnotami 1, 0, 0, 0
+int d[2] = { 2, 3 };    // pole s hodnotami 2, 3
+</code></pre>
+<p>Hodnot samozřemě nemůžete zadat více, než je velikost pole.</p>
+<p>Pokud využijete inicializaci statického pole, můžete vynechat velikost pole v hranatých závorkách.
+Překladač v tomto případě dopočítá velikost za vás:</p>
+<pre><code class="language-c">int p[] = { 1, 2, 3 }; // p je pole s třemi čísly, překladač si odvodí int p[3]
+</code></pre>
+<h2><a class="header" href="#přístup-k-prvkům-pole" id="přístup-k-prvkům-pole">Přístup k prvkům pole</a></h2>
+<p>Abychom využili toho, že nám pole umožňují vytvořit větší množství paměti najednou, musíme mít
+možnost přistupovat k jednotlivým prvkům v poli. K tomu můžeme využít
+<a href="../prace_s_pameti/ukazatele.html">ukazatelů</a>. Proměnná pole se totiž chová jako ukazatel na první
+prvek (prvek na nultém indexu!) daného pole, pomocí operátoru
+<a href="../prace_s_pameti/ukazatele.html#p%C5%99%C3%ADstup-k-pam%C4%9Bti-pomoc%C3%AD-ukazatele">dereference</a> tak k tomutu prvku
+můžeme jednoduše přistoupit:</p>
+<pre><code class="language-c editable mainbody">#include &lt;stdio.h&gt;
+
+int main() {
+    int pole[3] = { 1, 2, 3 };
+    printf(&quot;%d\n&quot;, *pole);
+    return 0;
+}
+</code></pre>
+<p>Abychom přistoupili i k dalším prvkům v poli, tak můžeme využít
+<a href="../prace_s_pameti/ukazatele.html#aritmetika-s-ukazateli">aritmetiky s ukazateli</a>. Pokud chceme
+získat adresu prvku na <code>i</code>-tém indexu, stačí k ukazateli na první prvek přičíst <code>i</code><sup class='margin-toggle sidenote-number'>5</sup>:</p>
+<span class='sidenote'><p><sup class='number'>5</sup>Všimněte si, že při použití operátoru dereference zde používáme závorky. Je to z důvodu
+<a href="https://en.cppreference.com/w/c/language/operator_precedence">priority operátorů</a>. Výraz <code>*pole + 2</code>
+by se vyhodnotil jako první prvek z pole <code>pole</code> plus <code>2</code>, protože <code>*</code> (dereference) má větší
+prioritu než sčítání. </p>
+</span>
+<pre><code class="language-c editable mainbody">#include &lt;stdio.h&gt;
+
+int main() {
+    int pole[3] = { 1, 2, 3 };
+    printf(&quot;%d\n&quot;, *(pole + 0));   // první prvek pole
+    printf(&quot;%d\n&quot;, *(pole + 1));   // druhý prvek pole
+    printf(&quot;%d\n&quot;, *(pole + 2));   // třetí prvek pole
+    return 0;
+}
+</code></pre>
+<p>Nyní už možná tušíte, proč se při práci s poli vyplatí počítat od nuly. Prvek na nultém indexu je
+totiž vzdálen nula prvků od začátku pole. Prvek na prvním indexu je vzdálen jeden prvek od začátku
+pole atd. Pokud bychom indexovali od jedničky, museli bychom při výpočtu adresy relativně k ukazateli
+na začátek pole vždy odečíst jedničku, což by bylo nepraktické.</p>
+<blockquote>
+<p>Přistupování k prvkům pole se běžně označuje pojmem <strong>indexování pole</strong>.</p>
+</blockquote>
+<h2><a class="header" href="#operátor-přístupu-k-poli" id="operátor-přístupu-k-poli">Operátor přístupu k poli</a></h2>
+<p>Jelikož je operace přístupu k poli (&quot;posunutí&quot; ukazatele a jeho dereference) velmi
+běžná (a zároveň relativně krkolomná), <em>C</em> obsahuje speciální operátor, který ji zjednodušuje.
+Tento operátor se nazývá <em>array subscription operator</em> a má syntaxi</p>
+<pre><code>&lt;výraz a&gt;[&lt;výraz b&gt;]
+</code></pre>
+<p>Slouží jako zkratka<sup class='margin-toggle sidenote-number'>6</sup> za výraz</p>
+<span class='sidenote'><p><sup class='number'>6</sup>Takovéto &quot;zkratky&quot;, které v programovacím jazyku nepřináší novou funkcionalitu, pouze zkracují
+či zjednoduššují často používané kombinace příkazů, se označují jako
+<a href="https://en.wikipedia.org/wiki/Syntactic_sugar"><strong>syntactic sugar</strong></a>.</p>
+</span>
+<pre><code>*(&lt;výraz a&gt; + &lt;výraz b&gt;)
+</code></pre>
+<p>Příklad:</p>
+<ul>
+<li><code>pole[0]</code> je ekvivalentní výrazu <code>*(pole + 0)</code></li>
+<li><code>pole[5]</code> je ekvivalentní výrazu <code>*(pole + 5)</code></li>
+</ul>
+<pre><code class="language-c">int pole[3] = { 1, 2, 3 };
+pole[0] = 5;       // nastavili jsme první prvek pole na hodnotu `5`
+int c = pole[2];   // nastavili jsme `c` na hodnotu posledního (třetího) prvku pole
+</code></pre>
+<p>Jelikož je používání hranatých závorek přehlednější než používání závorek a hvězdiček, doporučujeme
+je používat pro přistupování k prvkům pole, pokud to půjde.</p>
+<blockquote>
+<p>Pozor na rozdíl mezi tímto operátorem a definicí pole. Obojí sice používá hranaté závorky, ale
+jinak spolu tyto dvě věci nesouvisejí. Podobně jako se <code>*</code> používá pro definici datového typu
+ukazatele a <a href="../prace_s_pameti/ukazatele.html#p%C5%99%C3%ADstup-k-pam%C4%9Bti-pomoc%C3%AD-ukazatele">zároveň</a>
+jako operátor dereference (navíc i jako operátor pro násobení). Vždy záleží na kontextu, kde jsou
+tyto znaky použity.</p>
+</blockquote>
+<h2><a class="header" href="#použití-polí-s-cykly" id="použití-polí-s-cykly">Použití polí s cykly</a></h2>
+<p>Pokud bychom k polím přistupovali po individuálních prvcích, tak bychom nemohli využít jejich plný
+potenciál. I když umíme jedním řádkem kódu vytvořit například 100 různých hodnot (<code>int pole[100];</code>),
+pokud bychom museli psát <code>pole[0]</code>, <code>pole[1]</code> atd. pro přístup k jednotlivým prvkům, tak bychom
+nemohli s polem efektivně pracovat. Smyslem polí je umožnit zpracování velkého množství dat jednotným
+způsobem pomocí krátkého kusu kódu. Jinak řečeno, chtěli bychom mít stejný kód, který umí zpracovat
+pole o velikosti <code>2</code> i <code>1000</code>. K tomu můžeme efektivně využít <a href="../rizeni_toku/cykly.html">cykly</a>.</p>
+<p>Často je praktické použít <a href="../rizeni_toku/while.html#%C5%98%C3%ADd%C3%ADc%C3%AD-prom%C4%9Bnn%C3%A1">řídící proměnnou</a> cyklu k tomu,
+abychom pomocí ní indexovali pole. Například, pokud bychom měli pole s velikostí <code>10</code>, tak ho můžeme
+&quot;projít&quot;<sup class='margin-toggle sidenote-number'>7</sup> pomocí cyklu <code>for</code>:</p>
+<span class='sidenote'><p><sup class='number'>7</sup>Používá se také pojem <em>proiterovat</em>.</p>
+</span>
+<pre><code class="language-c editable mainbody">#include &lt;stdio.h&gt;
+
+int main() {
+    int pole[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    for (int i = 0; i &lt; 10; i++) {
+        printf(&quot;%d &quot;, pole[i]);
+    }
+    return 0;
+}
+</code></pre>
+<p>Situace, kdy pomocí cyklu projdeme pole, je velmi častá a určitě se s ní mnohokrát setkáte a
+využijete ji. Zkuste si to procvičit například pomocí
+<a href="../../ulohy/pole.html#minim%C3%A1ln%C3%AD-hodnota-v-poli">těchto úloh</a>.</p>
+<h2><a class="header" href="#předávání-pole-do-funkcí" id="předávání-pole-do-funkcí">Předávání pole do funkcí</a></h2>
+<p>Pole můžeme (stejně jako hodnoty jiných datových typů) předávat jako argumenty do funkcí.
+Musíme si při tom však dávat pozor zejména na dvě věci.</p>
+<h3><a class="header" href="#převod-pole-na-ukazatel" id="převod-pole-na-ukazatel">Převod pole na ukazatel</a></h3>
+<p>Už víme, že když předáváme <a href="../funkce/funkce.html#parametrizace-funkc%C3%AD">argumenty</a> do funkcí, tak se
+jejich hodnota zkopíruje. U statických polí tomu tak ovšem není, protože pole můžou být potenciálně
+velmi velká a provádění kopií polí by tak potenciálně mohlo brzdit provádění programu. Když tak
+použijeme proměnnou pole jako argument při volání funkce, dojde k tzv. <strong>konverzi pole na ukazatel</strong>
+(<em>array to pointer decay</em>). Pole se tak vždy předá jako ukazatel na jeho první prvek:</p>
+<pre><code class="language-c editable">#include &lt;stdio.h&gt;
+
+void vypis_pole(int* pole) {
+    printf(&quot;%d\n&quot;, pole[0]);
+}
+
+int main() {
+    int pole[3] = { 1, 2, 3 };
+    vypis_pole(pole);
+    return 0;
+}
+</code></pre>
+<p>Pro parametry sice můžete použít datový typ pole:</p>
+<pre><code class="language-c">void vypis_pole(int pole[3]) { ... }
+</code></pre>
+<p>nicméně i v tomto případě se bude takovýto parametr chovat stejně jako ukazatel (v tomto případě
+tedy <code>int*</code>). Navíc překladač ani nebude kontrolovat, jestli do takového parametru opravdu dáváme
+pole se správnou velikostí. Pro parametry reprezentující pole tak raději rovnou používejte ukazatel,
+abychom čtenáře kódu nemátli.</p>
+<h3><a class="header" href="#předávání-velikosti-pole" id="předávání-velikosti-pole">Předávání velikosti pole</a></h3>
+<p>Když ve funkci přijmeme jako parametr ukazatel na pole, tak nevíme, kolik prvků v tomto poli je.
+Tato informace je ale stěžejní, bez ní totiž nevíme, ke kolika prvkům pole si můžeme dovolit
+přistupovat. Pokud tedy ukazatel na pole předáváme do funkce, je obvykle potřeba zároveň s ním
+předat i délku daného pole:</p>
+<pre><code class="language-c">int secti_pole(int* pole, int velikost) {
+    int soucet = 0;
+    for (int i = 0; i &lt; velikost; i++) {
+        soucet += pole[i];
+    }
+    return soucet;
+}
+</code></pre>
+<h4><a class="header" href="#výpočet-velikosti-pole" id="výpočet-velikosti-pole">Výpočet velikosti pole</a></h4>
+<p>Abyste při změně velikosti statického pole nemuseli ručně jeho velikost upravovat na více místech v
+kódu, tak můžete ve funkci, kde definujete statické pole, vypočítat jeho velikost pomocí operátoru
+<code>sizeof</code>:</p>
+<pre><code class="language-c">int pole[3] = { 1, 2, 3 };
+printf(&quot;Velikost pole v bytech: %lu\n&quot;, sizeof(pole));
+</code></pre>
+<p>Abyste zjistili počet prvků ve statickém poli, můžete velikost v bytech vydělit velikostí každého
+prvku v poli:</p>
+<pre><code class="language-c">int pole[3] = { 1, 2, 3 };
+printf(&quot;Pocet prvku v poli: %lu\n&quot;, sizeof(pole) / sizeof(pole[0]));
+</code></pre>
+<blockquote>
+<p>Operátor <code>sizeof</code> bude pro toto použití fungovat pouze pro statické pole a pouze ve funkci, ve které
+statické pole vytváříte! Pokud pole pošlete do jiné funkce, už z něj bude pouze ukazatel, pro který
+<code>sizeof</code> vrátí velikost ukazatele (což bude na vašem PC nejspíše <code>8</code> bytů). Více v kvízech níže.</p>
+</blockquote>
+<hr />
+<p><strong>Kvíz</strong> 🤔</p>
+<ol>
+<li>
+<p>Co vypíše následující program?</p>
+<pre><code class="language-c editable mainbody">#include &lt;stdio.h&gt;
+
+int main() {
+    int pole[3] = { 1, 4, 7 };
+    int a = *pole + 1;
+    int b = *(pole + 1);
+
+    printf(&quot;a = %d, b = %d\n&quot;, a, b);
+
+    return 0;
+}
+</code></pre>
+<details>
+ <summary>Odpověď</summary>
+<p>Program vypíše <code>a = 2, b = 4</code>. Jelikož má operátor dereference (<code>*</code>) větší
+<a href="https://en.cppreference.com/w/c/language/operator_precedence">prioritu</a> než operátor sečtení
+(<code>+</code>), tak se do proměnné <code>a</code> uloží hodnota (<code>2</code>). Nejprve se totiž provede výraz <code>*pole</code>, kde
+dojde k dereferenci ukazatele na první prvek pole, čímž vznikne hodnota <code>1</code>, a k ní se poté přičte
+jednička.</p>
+<p>V případě proměnné <code>b</code> se nejprve ukazatel na první prvek pole posune o jeden prvek dopředu, tj.
+na adresu druhého prvku pole, který má hodnotu <code>4</code>. Poté dojde k dereferenci adresy tohoto prvku,
+do proměnné <code>b</code> se tak uloží hodnota <code>4</code>.</p>
+</details>
+</li>
+<li>
+<p>Co vypíše následující program?</p>
+<pre><code class="language-c editable mainbody">#include &lt;stdio.h&gt;
+
+void prijmi_pole(int p[3]) {
+    p[2] += 1;
+}
+
+int main() {
+    int pole[3] = { 1, 2, 3 };
+
+    prijmi_pole(pole); 
+
+    printf(&quot;{ %d, %d, %d }\n&quot;, pole[0], pole[1], pole[2]);
+
+    return 0;
+}
+</code></pre>
+<details>
+ <summary>Odpověď</summary>
+<p>Program vypíše <code>{ 1, 2, 4 }</code>. Při předávání statického pole do funkce dojde pouze k předání
+ukazatele na jeho první prvek (i když má parametr typ <code>int p[3]</code>). Pokud tedy pomocí ukazatele
+<code>p</code> změníme hodnotu třetího prvku pole, tato změna se nám projeví i ve funkci <code>main</code>, protože
+stále pracujeme s tou stejnou pamětí.</p>
+</details>
+</li>
+<li>
+<p>Co vypíše následující program?</p>
+<pre><code class="language-c editable mainbody">#include &lt;stdio.h&gt;
+
+int main() {
+    int pole[3] = { 1, 2, 3 };
+    int *p = pole;
+
+    p[1] = 5;
+    pole[0] = 8;
+
+    printf(&quot;%d, %d\n&quot;, *p, pole[1]);
+
+    return 0;
+}
+</code></pre>
+<details>
+ <summary>Odpověď</summary>
+<p>Program vypíše <code>8, 5</code>. Do ukazatele <code>p</code> jsme si uložili adresu prvního prvku v poli. Pomocí
+<code>p[1]</code> posuneme ukazatel o jeden prvek v paměti &quot;dopředu&quot; (bude tedy ukazovat na druhý prvek pole)
+a rovnou na tuto adresu v paměti zapíšeme hodnotu <code>5</code>. Poté změníme hodnotu prvního prvku pole
+na <code>8</code>. Jelikož <code>p</code> ukazuje na první prvek v poli, tak při jeho dereferenci získáme právě hodnotu
+<code>8</code>. A jelikož jsme předtím pomocí ukazatele <code>p</code> změnili druhý prvek pole na <code>5</code>, tak <code>pole[1]</code>
+také vrátí hodnotu <code>5</code>.</p>
+</details>
+</li>
+<li>
+<p>Co vypíše následující program?</p>
+<pre><code class="language-c editable mainbody">#include &lt;stdio.h&gt;
+
+int main() {
+    int pole[3] = { 1, 2, 3 };
+    printf(&quot;%d\n&quot;, pole);
+
+    return 0;
+}
+</code></pre>
+<details>
+ <summary>Odpověď</summary>
+<p>Tento program obsahuje <a href="../../ruzne/nedefinovane_chovani.html"><strong>nedefinované chování</strong></a> 💣, protože jsme použili
+<a href="../prikazy_vyrazy.html#v%C3%BDpis-v%C3%BDraz%C5%AF">zástupný znak</a> <code>%d</code>, který slouží k výpisu celých čísel, ale
+předali jsme funkci <code>printf</code> argument <code>pole</code>, který je datového typu pole (resp. ukazatel na první
+prvek tohoto pole).</p>
+</details>
+</li>
+<li>
+<p>Co vypíše následující program?</p>
+<pre><code class="language-c editable mainbody">#include &lt;stdio.h&gt;
+
+int main() {
+    int p[3] = { 1, 2, 3 };
+    for (int i = 0; i &lt;= 3; i++) {
+        printf(&quot;%d\n&quot;, p[i]);
+    }
+
+    return 0;
+}
+</code></pre>
+<details>
+ <summary>Odpověď</summary>
+<p>Tento program obsahuje <a href="../../ruzne/nedefinovane_chovani.html"><strong>nedefinované chování</strong></a> 💣, protože jsme přistoupili (dereferencovali)
+paměť mimo rozsah pole! Pole <code>p</code> má pouze tři prvky, nesmíme tedy přistoupit k indexu <code>3</code> či vyššímu,
+což se však v tomto programu stane, protože proměnná <code>i</code> nabývá hodnot <code>0</code>, <code>1</code>, <code>2</code> a <code>3</code>.</p>
+<p>Ať už tento program při konkrétním spuštění vypíše cokoliv, nemá cenu se tím zaobírat. Tento program
+obsahuje paměťovou chybu, která může způsobit pád programu, libovolnou změnu hodnot v paměti nebo
+cokoliv jiného. Chybu musíte nejprve odstranit, jinak program nebude správně fungovat.</p>
+</details>
+</li>
+<li>
+<p>Co vypíše následující program?</p>
+<pre><code class="language-c editable mainbody">#include &lt;stdio.h&gt;
+
+int main() {
+    int pole[3] = { 1, 2, 3 };
+    2[pole] = 5;
+
+    printf(&quot;%d\n&quot;, pole[2]);
+
+    return 0;
+}
+</code></pre>
+<details>
+ <summary>Odpověď</summary>
+<p>Program vypíše <code>5</code>. I když to vypadá zvláštně, tak jelikož je sčítání komutativní, a operátor
+<code>a[b]</code> je definován jako <code>*(a + b)</code>, tak je jedno, jestli napíšete <code>a[b]</code> nebo <code>b[a]</code>. Takovýto
+zápis je nicméně nestandardní a nepoužívá se, tato úloha pouze měla demonstrovat, že jej takto
+teoreticky použít lze, a že <code>a[b]</code> opravdu není nic jiného, než zkratka za <code>*(a + b)</code>.</p>
+</details>
+</li>
+<li>
+<p>Co vypíše následující program?</p>
+<pre><code class="language-c editable mainbody">#include &lt;stdio.h&gt;
+
+int main() {
+    char pole[3];
+    char* ptr = pole;
+
+    printf(&quot;%d\n&quot;, (int) sizeof(pole));
+    printf(&quot;%d\n&quot;, (int) sizeof(ptr));
+
+    return 0;
+}
+</code></pre>
+<details>
+ <summary>Odpověď</summary>
+ Program vypíše toto (na 32-bitovém systému by druhé číslo bylo pravděpodobně 4):
+<pre><code>3
+8
+</code></pre>
+<p>Operátor <code>sizeof</code> vrátí velikost celého statického pole, pokud jej do něj předáme. Pokud však
+do něj dáme pouze ukazatel, tak <code>sizeof</code> neví, jak velká paměť leží na adrese uložené v tomto
+ukazateli, proto nám místo toho vrátí pouze velikost daného ukazatele, což bude na 64-bitovém
+systému pravděpodobně <code>8</code> bytů.</p>
+</details>
+</li>
+<li>
+<p>Co vypíše následující program?</p>
+<pre><code class="language-c editable">#include &lt;stdio.h&gt;
+
+void print_size(char pole[3]) {
+    printf(&quot;%d\n&quot;, (int) sizeof(pole));
+}
+
+int main() {
+    char pole[3];
+    print_size(pole);
+
+    return 0;
+}
+</code></pre>
+<details>
+ <summary>Odpověď</summary>
+ Program pravděpodobně vypíše řádek s hodnotou 8 (na 64-bitovém systému) či 4 (na 32-bitovém
+ systému). Pokud použijeme datový typ pole jako parametr funkce, tak se k němu překladač bude
+ víceméně chovat jako k běžnému ukazateli. Je to z toho důvodu, že překladač neví, jak velkou paměť
+ do funkce předáváme (můžeme tuto funkci zavolat
+ s ukazatelem na různě velká pole!). Z toho důvodu je tak lepší pro parametry funkcí vždy používat
+ rovnou ukazatel a ne pole, abychom zamezili nejasnostem.
+<p>Tyto následující tři signatury funkce jsou tedy v podstatě totožné:</p>
+<pre><code class="language-c">void print_size(char pole[3]);
+void print_size(char pole[]);
+void print_size(char* pole);
+</code></pre>
+</details>
+</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../../c/pole/pole.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../../c/pole/dynamicka_pole.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../../c/pole/pole.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../../c/pole/dynamicka_pole.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+        <!-- Google Analytics Tag -->
+        <script type="text/javascript">
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+
+            // make sure we don't activate google analytics if the developer is
+            // inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-177556287-1', 'auto');
+                ga('send', 'pageview');
+            }
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="../../theme/mode-c_cpp.min.js"></script>
+        
+        <script type="text/javascript" src="../../theme/asciinema-player.js"></script>
+        
+        <script type="text/javascript" src="../../src/wasm/xterm.min.js"></script>
+        
+        <script type="text/javascript" src="../../src/wasm/fit.min.js"></script>
+        
+        <script type="text/javascript" src="../../src/wasm/shared.js"></script>
+        
+        <script type="text/javascript" src="../../src/wasm/web.js"></script>
+        
+
+        
+
+    </body>
+</html>
