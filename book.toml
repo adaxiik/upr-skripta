@@ -18,7 +18,8 @@ additional-js = [
   "src/wasm/xterm.min.js",
   "src/wasm/fit.min.js",
   "src/wasm/shared.js",
-  "src/wasm/web.js"
+  "src/wasm/web.js",
+  "src/wasm/coi-serviceworker.js"
 ]
 additional-css = [
   "theme/css/tufte.css",
